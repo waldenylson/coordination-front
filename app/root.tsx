@@ -13,8 +13,6 @@ import { cssBundleHref } from "@remix-run/css-bundle";
 import { getUser } from "~/session.server";
 import tailwindStylesheetUrl from "~/styles/tailwind.css";
 
-import { ProSidebarProvider } from "react-pro-sidebar";
-
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: tailwindStylesheetUrl },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -34,12 +32,10 @@ export default function App() {
         <Links />
       </head>
       <body className="h-full">
-        <ProSidebarProvider>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </ProSidebarProvider>
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
       </body>
     </html>
   );
