@@ -11,12 +11,19 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import SidebarCSSFile from "~/components/Sidebar/style.css";
+import React, { useRef } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: SidebarCSSFile },
 ];
 
+const teste = () => {
+  const modeSwitch = document.body.querySelector(".toggle-switch");
+  const modeText = document.body.querySelector(".mode-text");
+};
+
 export default function App() {
+  const modeText = useRef();
   return (
     <html lang="en" className="h-full">
       <head>
@@ -30,21 +37,17 @@ export default function App() {
         <Links />
         <title>Sidebar File Title</title>
       </head>
-      <body className="h-full">
-        <nav className="sidebar close">
+      <body className="">
+        <nav className="sidebar">
           <header>
             <div className="image-text">
-              {/* <span className="image">
-                <img src="logo.png" alt="" />
-              </span> */}
-
               <div className="text logo-text">
-                <span className="name">Codinglab</span>
-                <span className="profession">Web developer</span>
+                <span className="name">SCAMANTO</span>
+                <span className="profession">Coordenação Manutenções</span>
               </div>
             </div>
 
-            <i className="bx bx-chevron-right toggle"></i>
+            {/* <i className="bx bx-chevron-right toggle"></i> */}
           </header>
 
           <div className="menu-bar">
@@ -112,9 +115,11 @@ export default function App() {
                   <i className="bx bx-moon icon moon"></i>
                   <i className="bx bx-sun icon sun"></i>
                 </div>
-                <span className="mode-text text">Dark mode</span>
+                <span ref={modeText} className="mode-text dark">
+                  Dark mode
+                </span>
 
-                <div className="toggle-switch">
+                <div className="toggle-switch" onClick={teste}>
                   <span className="switch"></span>
                 </div>
               </li>
