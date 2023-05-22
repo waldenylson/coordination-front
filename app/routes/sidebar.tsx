@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -11,19 +12,23 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import SidebarCSSFile from "~/components/Sidebar/style.css";
-import React, { useRef } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: SidebarCSSFile },
 ];
 
-const teste = () => {
-  const modeSwitch = document.body.querySelector(".toggle-switch");
-  const modeText = document.body.querySelector(".mode-text");
-};
-
 export default function App() {
-  const modeText = useRef();
+  const handleTheme = () => {
+    let body = document.querySelector("body");
+    body?.classList.toggle("dark");
+  };
+
+  const handleSidebarState = () => {
+    let sidebar = document.querySelector("nav");
+
+    sidebar?.classList.toggle("close");
+  };
+
   return (
     <html lang="en" className="h-full">
       <head>
@@ -41,13 +46,19 @@ export default function App() {
         <nav className="sidebar">
           <header>
             <div className="image-text">
+              <span className="image">
+                <img src="logo.png" alt="" />
+              </span>
               <div className="text logo-text">
-                <span className="name">SCAMANTO</span>
+                <span className="name">COORDENA</span>
                 <span className="profession">Coordenação Manutenções</span>
               </div>
             </div>
 
-            {/* <i className="bx bx-chevron-right toggle"></i> */}
+            <i
+              className="bx bx-chevron-right toggle"
+              onClick={handleSidebarState}
+            ></i>
           </header>
 
           <div className="menu-bar">
@@ -59,10 +70,10 @@ export default function App() {
 
               <ul className="menu-links">
                 <li className="nav-link">
-                  <a href="#">
+                  <Link to="/login">
                     <i className="bx bx-home-alt icon"></i>
                     <span className="text nav-text">Dashboard</span>
-                  </a>
+                  </Link>
                 </li>
 
                 <li className="nav-link">
@@ -115,11 +126,9 @@ export default function App() {
                   <i className="bx bx-moon icon moon"></i>
                   <i className="bx bx-sun icon sun"></i>
                 </div>
-                <span ref={modeText} className="mode-text dark">
-                  Dark mode
-                </span>
+                <span className="mode-text dark">Dark mode</span>
 
-                <div className="toggle-switch" onClick={teste}>
+                <div className="toggle-switch" onClick={handleTheme}>
                   <span className="switch"></span>
                 </div>
               </li>
